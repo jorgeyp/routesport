@@ -1,7 +1,7 @@
 var centre = new google.maps.LatLng(43.5314284, -5.6684546);
 var map;
 var wmsUrl = "http://ide.gijon.es:8080/geoserver/wms?SERVICE=WMS&VERSION=1.1.1";
-var wmsLayers = "Gijon:LU_Zona_Verde,Gijon:Rutas_Verdes";
+var wmsLayers = "Gijon:LU_Zona_Verde,Gijon:Rutas_Verdes,Gijon:Golf,Gijon:Instalaciones_Deportivas,Gijon:Playas";
 //var wmsStyle = "polygon,line"
 
 var TileWMS = function(coord,zoom) {
