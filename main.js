@@ -36,8 +36,9 @@ function initialize() {
   map = new google.maps.Map(document.getElementById("map"), options);
   
   var overlayOptions = {
-      getTileUrl: TileWMS,
-      tileSize: new google.maps.Size(256, 256)
+    getTileUrl: TileWMS,
+    tileSize: new google.maps.Size(256, 256),
+    opacity: 0.35
   };
   var overlayWMS = new google.maps.ImageMapType(overlayOptions);
   map.overlayMapTypes.push(overlayWMS);
