@@ -23,7 +23,7 @@ function initialize() {
 
   var options = {
     center: centre,
-    zoom: 17,
+    zoom: 14,
     mapTypeId: google.maps.MapTypeId.HYBRID,
     styles: [{
         elementType: "labels",
