@@ -4,22 +4,77 @@
   <meta name="viewport" content="initial-scale=1.0">
   <meta charset="utf-8">
   <title>Routesport</title>
-  <link rel="stylesheet" type="text/css" href="main.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
+  <script type="text/javascript" src="http://www.google.com/jsapi"></script> 
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script>
   <script type="text/javascript" src="main.js"></script>
 
 </head>
-<body onload="initialize()">
- 
-  <div id="container">
-    <div id="menu">
-      <p>Here goes the menu.</p>
-      <div id="wms-texto"></div>
-    </div>
-    <div id="map">
-      
+<body onload="initialize()"> 
+  <div id="container" class="container">
+    <div class="title"><h1>Route Sport</h1></div>
+    <div id="map" class="map"></div>
+    <div id="menu" class="menu">
+	  <div id="layers-controls" class="layers-controls">
+      <p id="layers-title" class="layers-title">Layers</p>
+      <div class="checkbox">
+        <label>
+          <input id="green_zones" type="checkbox" onclick="setCheckLayers()" value="Gijon:LU_Zona_Verde"> Green zones
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input id="green_routes" type="checkbox" onclick="setCheckLayers()" value="Gijon:Rutas_Verdes"> Green routes
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input id="golf_zones" type="checkbox" onclick="setCheckLayers()" value="Gijon:Golf"> Gol zones
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input id="sport_installations" onclick="setCheckLayers()" type="checkbox" value="Gijon:Instalaciones_Deportivas"> Sport installations
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input id="beaches" type="checkbox" onclick="setCheckLayers()" value="Gijon:Playas"> Beaches
+        </label>
+      </div>
+      <div id="buttons-panel" class="buttons-panel">
+        <input id="calculate_route" class="btn btn-primary" type="button" onclick="calculateAndDisplayRoute();"value="Calculate route"/>
+        <input id="detail_info" type="button" class="btn btn-info" onclick="routeDetailInformation();" value="Details" data-toggle="modal" data-target="#detailsModal"/>
+        <input id="detail_info" type="button" class="btn btn-warning" onclick="deleteMarkers();" value="Delete all"/>
+      </div>
+	  </div>
     </div>
   </div>
+
+  <!-- Modal -->
+  <div id="detailsModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Route's Details</h4>
+        </div>
+        <div class="modal-body">
+            <p id="no_route_txt" class="no_route_txt"></p>
+            <div id="elevation_chart" class="elevation"></div>
+            <div id="route_information" class="route_information"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>
