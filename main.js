@@ -166,7 +166,7 @@ function calculateAndDisplayRoute() {
 
   var request = {
     origin: markers[0].position,
-    destination: markers[lastIndex].position,
+    destination: markers[0].position,
     waypoints: waypts,
     optimizeWaypoints: true,
     travelMode: google.maps.TravelMode.WALKING
