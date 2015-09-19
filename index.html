@@ -49,6 +49,23 @@
             <input id="beaches" type="checkbox" onclick="setCheckLayers()" value="Gijon:Playas"> Beaches
           </label>
         </div>
+        <p id="routes-title" class="routes-title">Routes</p>
+        <div class="radio">
+          <label>
+            <input type="radio" name="route-type" id="all-markers" value="all" checked>
+            Use all the markers
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="route-type" id="radius-markers" value="radius">
+            Use the markers in a radius
+          </label>
+        </div>
+        <div class="row">
+          <div class="col-md-4">Radius: </div>
+          <div class="col-md-8"><input id="route-range" type="range"/></div>
+        </div>
         <div id="buttons-panel" class="buttons-panel">
           <input id="calculate_route" class="btn btn-primary" type="button" onclick="calculateAndDisplayRoute();" value="Calculate route" />
           <input id="detail_info" type="button" class="btn btn-info" onclick="routeDetailInformation();" value="Details" data-toggle="modal" data-target="#detailsModal" />
