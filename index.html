@@ -20,6 +20,13 @@
     <div class="title">
       <h1>Routesport.io</h1>
     </div>
+    <div id="direction-container" class="direction-container">
+      <form id="direction-form" action="javascript:setGeocodingAddress()">
+        <input id="direction" type="text" class="direction-txt"> 
+        <input id="direction-btn" type="submit" class="direction-btn" value="Search"> 
+      </form>
+      <p id="direction-example" class="direction-example">Example: C/Jovellanos, 21. C.P. 33201</p>
+    </div>
     <div id="map" class="map"></div>
     <div id="menu" class="menu">
       <div id="layers-controls" class="layers-controls">
