@@ -169,9 +169,11 @@ function calculateAndDisplayRoute() {
   for (var i = 1; i < lastIndex; i++) {
       if (routeType == "radius") {
         var start = markers[0]
-        var distance = google.maps.geometry.spherical.computeDistanceBetween(start, markers[i])
+        var distance = google.maps.geometry.spherical.computeDistanceBetween(start.position, markers[i].position)
+        console.log(distance)
         if (distance > radius) {
-          break;
+          console.log("mayor")
+          continue;
         }
       }
       waypts.push({
