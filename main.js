@@ -14,6 +14,8 @@ var wmsLayers = ["Gijon:LU_Zona_Verde", "Gijon:Rutas_Verdes", "Gijon:Golf", "Gij
 var paramWmsLayers;
 var bbox;
 var wmsParameters;
+var radius = 0;
+var radiusOverlay;
 //var wmsStyle = "polygon,line"
 
 google.load("visualization", "1", {packages: ["columnchart"]});
@@ -267,3 +269,22 @@ function plotElevation(results, status) {
     });
   }
 } 
+
+function setRadius(value) {
+  radius = parseInt(value);
+}
+
+function drawRadius() {
+  if (radiusOverlay != null)
+    radiusOverlay.setMap(null);
+  radiusOverlay = new google.maps.Circle({
+    strokeColor: 'blue',
+    strokeOpacity: '0.5',
+    strokeWeight: 2,
+    fillColor: 'blue',
+    fillOpacity: 0.2,
+    map: map,
+    center: markers[0].position,
+    radius: radius
+  });
+}
