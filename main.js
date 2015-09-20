@@ -161,6 +161,13 @@ function calculateAndDisplayRoute() {
   directionsDisplay.setMap(map);
   var lastIndex = markers.length-1;
   for (var i = 1; i < lastIndex; i++) {
+      if (routeType == "radius") {
+        var start = markers[0]
+        var distance = google.maps.geometry.spherical.computeDistanceBetween(start, markers[i])
+        if (distance > radius) {
+          break;
+        }
+      }
       waypts.push({
         location: markers[i].position,
         stopover: true
@@ -180,6 +187,8 @@ function calculateAndDisplayRoute() {
       directionsDisplay.setDirections(result);
     }
   });
+  if (radiusOverlay != null)
+    radiusOverlay.setMap(null);
 }
 
 // Esconder los marcadores que pone el usuario ya que al crear la ruta google pone los suyos
@@ -201,6 +210,8 @@ function deleteMarkers() {
   directionsDisplay.setMap(null);
   map.setCenter(centre)
   map.setZoom(mapZoom);
+  if (radiusOverlay != null)
+    radiusOverlay.setMap(null);
 }
 
 // Añadir el gráfico de elevación y la ruta detallada en el modal.
