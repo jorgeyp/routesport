@@ -75,24 +75,31 @@ function selectAllCheckboxes() {
 
 function setCheckLayers () {
   var checkboxes = document.getElementsByTagName("input");
-  var indexLayers = wmsLayers.length;
-  paramWmsLayers = null;
+  var indexLayers;
+  var layers = [];
+  var counter = 0;
+  paramWmsLayers = "";
+
   for(var i=0;i<checkboxes.length;i++) {
     if(checkboxes[i].type === 'checkbox' && checkboxes[i].checked==true) {
       var checkboxValue = checkboxes[i].value;
       for(var j=0;j<wmsLayers.length;j++) {
         if(checkboxValue == wmsLayers[j]) {
-          if(j==0){
-            paramWmsLayers=wmsLayers[j];
-          } else if(j!=(indexLayers-1)) {
-            paramWmsLayers +=","+wmsLayers[j];
-          } else if(j==indexLayers-1) {
-            paramWmsLayers +=","+wmsLayers[j];
-          }
+          layers[counter] = j;
+          counter++;
         }
       }
     }
   }
+  indexLayers = layers.length;
+  for(var i=0;i<layers.length;i++) {
+    if(i!=(indexLayers-1)) {
+      paramWmsLayers +=wmsLayers[layers[i]]+",";
+    } else if(i==(indexLayers-1)) {
+      paramWmsLayers +=wmsLayers[layers[i]]
+    }
+  }
+  alert(paramWmsLayers);
   setMapLayers();
 }
 
