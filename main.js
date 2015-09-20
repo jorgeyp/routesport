@@ -161,6 +161,14 @@ function setMarkers(location) {
     map: map,
     icon: pin
   });
+  var infowindow = new google.maps.InfoWindow({
+    content: '<div id="streetview" style="width:500px;height:500px;"></div>'
+  });
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+    pano = new google.maps.StreetViewPanorama(document.getElementById("streetview"));
+    pano.bindTo('position', marker);
+  });
   markers.push(marker);
   positions.push({"lat":location.lat(), "lng":location.lng()});
 }
