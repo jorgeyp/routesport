@@ -49,6 +49,23 @@
             <input id="beaches" type="checkbox" onclick="setCheckLayers()" value="Gijon:Playas"> Beaches
           </label>
         </div>
+        <p id="routes-title" class="layers-title">Routes</p>
+        <div class="radio">
+          <label>
+            <input type="radio" name="route-type" id="all-markers" value="all" onclick="setRouteType(this.value)" checked>
+            Use all the markers
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="route-type" id="radius-markers" value="radius" onclick="setRouteType(this.value)">
+            Use the markers in a radius
+          </label>
+        </div>
+        <div class="row">
+          <div class="col-md-2">Radius: </div>
+          <div class="col-md-10"><input id="range-slider" type="range" min="1" max="3000" step="1" oninput="setRadius(this.value)" onchange="drawRadius()" disabled/></div>
+        </div>
         <div id="buttons-panel" class="buttons-panel">
           <input id="calculate_route" class="btn btn-primary" type="button" onclick="calculateAndDisplayRoute();" value="Calculate route" />
           <input id="detail_info" type="button" class="btn btn-info" onclick="routeDetailInformation();" value="Details" data-toggle="modal" data-target="#detailsModal" />
@@ -56,12 +73,12 @@
         </div>
       </div>
     </div>
+    <div id="pano"></div>
   </div>
 
   <!-- Modal -->
   <div id="detailsModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -70,7 +87,10 @@
         </div>
         <div class="modal-body">
           <p id="no_route_txt" class="no_route_txt"></p>
-          <div id="elevation_chart" class="elevation"></div>
+          <div id="elevation-container" class="elevation-container">
+            <h2 id="elevation_title" class="elevation_text"> Elevation</h2>
+            <div id="elevation_chart" class="elevation"></div>
+          </div>
           <div id="route_information" class="route_information"></div>
         </div>
       </div>
