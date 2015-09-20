@@ -18,6 +18,7 @@ Gijon's geoserver service web: http://ide.gijon.es:8080/geoserver/web/.
   - Directions Service
   - Elevation Service
   - Street View
+  - Geocoding
   - Map types:
      - google.maps.MapTypeId.HYBRID
      - google.maps.MapTypeId.ROADMAP
