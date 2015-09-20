@@ -17,6 +17,7 @@ var wmsParameters;
 var radius = 0;
 var radiusOverlay;
 var routeType = "all";
+var geocoder;
 //var wmsStyle = "polygon,line"
 
 google.load("visualization", "1", {packages: ["columnchart"]});
@@ -61,6 +62,8 @@ function initialize() {
   google.maps.event.addListener(map, 'click', function(event) {
     setMarkers(event.latLng);
   });
+
+  geocoder = new google.maps.Geocoder();
 
   // Al inicio seleccionar todos los checkbox y añadir las capas
   selectAllCheckboxes();
@@ -227,7 +230,9 @@ function routeDetailInformation() {
 
   if(markers.length==0) {
     document.getElementById('no_route_txt').innerHTML = "You have to calculate a route";
+    document.getElementById("elevation_title").className = "txt_hidden";
   } else {
+    document.getElementById("elevation_title").className = "txt_show";
     document.getElementById("no_route_txt").className = "txt_hidden";
     // Create an ElevationService.
     elevator = new google.maps.ElevationService();
@@ -320,4 +325,16 @@ function setRouteType(type) {
       document.getElementById("range-slider").disabled = false;
       break;
   }
+}
+
+function setGeocodingAddress() {
+  var dir = document.getElementById("direction").value;
+  geocoder.geocode( { 'country': 'ES', 'latLng': centre,'address': dir}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      map.setCenter(results[0].geometry.location);
+      map.setZoom(16);
+    } else {
+      alert("Geocode was not successful for the following reason: " + status);
+    }
+  }); 
 }
