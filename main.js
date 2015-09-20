@@ -16,6 +16,7 @@ var bbox;
 var wmsParameters;
 var radius = 0;
 var radiusOverlay;
+var routeType = "all";
 //var wmsStyle = "polygon,line"
 
 google.load("visualization", "1", {packages: ["columnchart"]});
@@ -287,4 +288,16 @@ function drawRadius() {
     center: markers[0].position,
     radius: radius
   });
+}
+
+function setRouteType(type) {
+  routeType = type;
+  switch(type) {
+    case "all":
+      document.getElementById("range-slider").disabled = true;
+      break;
+    case "radius":
+      document.getElementById("range-slider").disabled = false;
+      break;
+  }
 }
