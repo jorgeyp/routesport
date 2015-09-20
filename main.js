@@ -292,6 +292,7 @@ function plotElevation(results, status) {
 
 function setRadius(value) {
   radius = parseInt(value);
+  document.getElementById("radius-label").innerHTML = "Radius: " + radius + " meters";
 }
 
 function drawRadius() {
