@@ -102,7 +102,6 @@ function setCheckLayers () {
       paramWmsLayers +=wmsLayers[layers[i]]
     }
   }
-  alert(paramWmsLayers);
   setMapLayers();
 }
 
