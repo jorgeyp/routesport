@@ -14,6 +14,9 @@ var wmsLayers = ["Gijon:LU_Zona_Verde", "Gijon:Rutas_Verdes", "Gijon:Golf", "Gij
 var paramWmsLayers;
 var bbox;
 var wmsParameters;
+var radius = 0;
+var radiusOverlay;
+var routeType = "all";
 //var wmsStyle = "polygon,line"
 
 google.load("visualization", "1", {packages: ["columnchart"]});
@@ -165,6 +168,13 @@ function calculateAndDisplayRoute() {
   directionsDisplay.setMap(map);
   var lastIndex = markers.length-1;
   for (var i = 1; i < lastIndex; i++) {
+      if (routeType == "radius") {
+        var start = markers[0]
+        var distance = google.maps.geometry.spherical.computeDistanceBetween(start, markers[i])
+        if (distance > radius) {
+          break;
+        }
+      }
       waypts.push({
         location: markers[i].position,
         stopover: true
@@ -184,6 +194,8 @@ function calculateAndDisplayRoute() {
       directionsDisplay.setDirections(result);
     }
   });
+  if (radiusOverlay != null)
+    radiusOverlay.setMap(null);
 }
 
 // Esconder los marcadores que pone el usuario ya que al crear la ruta google pone los suyos
@@ -205,6 +217,8 @@ function deleteMarkers() {
   directionsDisplay.setMap(null);
   map.setCenter(centre)
   map.setZoom(mapZoom);
+  if (radiusOverlay != null)
+    radiusOverlay.setMap(null);
 }
 
 // Añadir el gráfico de elevación y la ruta detallada en el modal.
@@ -274,3 +288,34 @@ function plotElevation(results, status) {
     });
   }
 } 
+
+function setRadius(value) {
+  radius = parseInt(value);
+}
+
+function drawRadius() {
+  if (radiusOverlay != null)
+    radiusOverlay.setMap(null);
+  radiusOverlay = new google.maps.Circle({
+    strokeColor: 'blue',
+    strokeOpacity: '0.5',
+    strokeWeight: 2,
+    fillColor: 'blue',
+    fillOpacity: 0.2,
+    map: map,
+    center: markers[0].position,
+    radius: radius
+  });
+}
+
+function setRouteType(type) {
+  routeType = type;
+  switch(type) {
+    case "all":
+      document.getElementById("range-slider").disabled = true;
+      break;
+    case "radius":
+      document.getElementById("range-slider").disabled = false;
+      break;
+  }
+}
