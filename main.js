@@ -166,7 +166,7 @@ function setMarkers(location) {
 function calculateAndDisplayRoute() {
   directionsDisplay.setMap(map);
   var lastIndex = markers.length-1;
-  for (var i = 1; i < lastIndex; i++) {
+  for (var i = 1; i <= lastIndex; i++) {
       if (routeType == "radius") {
         var start = markers[0]
         var distance = google.maps.geometry.spherical.computeDistanceBetween(start.position, markers[i].position)
