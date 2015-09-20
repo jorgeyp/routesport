@@ -34,6 +34,8 @@ Gijon's geoserver service web: http://ide.gijon.es:8080/geoserver/web/.
 
 ![alt tag](https://github.com/eskisabelamaia/routesport/blob/master/screenshot2.png)
 
+![alt tag](https://github.com/eskisabelamaia/routesport/blob/master/screenshot7.png)
+
 ![alt tag](https://github.com/eskisabelamaia/routesport/blob/master/screenshot3.png)
 
 ![alt tag](https://github.com/eskisabelamaia/routesport/blob/master/screenshot4.png)
