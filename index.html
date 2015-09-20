@@ -62,10 +62,8 @@
             Use the markers in a radius
           </label>
         </div>
-        <div class="row">
-          <div class="col-md-2">Radius: </div>
-          <div class="col-md-10"><input id="range-slider" type="range" min="1" max="3000" step="1" oninput="setRadius(this.value)" onchange="drawRadius()" disabled/></div>
-        </div>
+        <div id="radius-label">Radius: </div>
+        <input id="range-slider" type="range" min="1" max="3000" step="1" oninput="setRadius(this.value)" onchange="drawRadius()" disabled/>
         <div id="buttons-panel" class="buttons-panel">
           <input id="calculate_route" class="btn btn-primary" type="button" onclick="calculateAndDisplayRoute();" value="Calculate route" />
           <input id="detail_info" type="button" class="btn btn-info" onclick="routeDetailInformation();" value="Details" data-toggle="modal" data-target="#detailsModal" />
