@@ -179,7 +179,9 @@ function setMarkers(location) {
     content: '<div id="streetview" style="width:500px;height:500px;"></div>'
   });
   marker.addListener('click', function() {
+    closeAllInfowindows();
     infowindow.open(map, marker);
+    infowindows.push(infowindow);
     pano = new google.maps.StreetViewPanorama(document.getElementById("streetview"));
     pano.bindTo('position', marker);
   });
@@ -363,7 +365,8 @@ function setGeocodingAddress() {
 
 function closeAllInfowindows() {
   for (var i=0; i<infowindows.length; i++) {
-     infowindows[i].close();
+    infowindows[i].close();
+    infowindows = [];
   }
 }
 
@@ -377,6 +380,7 @@ function setCustomMarker(name, location, infowindow) {
   marker.addListener('click', function() {
     closeAllInfowindows();
     infowindow.open(map, marker);
+    infowindows.push(infowindow);
   });
   markers.push(marker)
 }
@@ -389,7 +393,6 @@ function setDefaultWaypoints() {
     var infowindow = new google.maps.InfoWindow({
           content: "<h2>" + name + "</h2><img id='info-img' src='" + waypoint.img + "'>"
         });
-    infowindows.push(infowindow);
     setCustomMarker(name, location, infowindow);
   }
 }
