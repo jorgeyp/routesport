@@ -354,7 +354,7 @@ function setGeocodingAddress() {
   geocoder.geocode( { 'country': 'ES', 'latLng': centre,'address': dir}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       map.setCenter(results[0].geometry.location);
-      map.setZoom(16);
+      map.setZoom(20);
     } else {
       alert("Geocode was not successful for the following reason: " + status);
     }
