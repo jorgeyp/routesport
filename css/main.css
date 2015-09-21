@@ -121,3 +121,7 @@ h1 {
   width: 30%;
   height: auto;
 }
+
+#info-img {
+  height: 200px; 
+}

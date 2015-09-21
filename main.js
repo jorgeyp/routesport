@@ -1,4 +1,5 @@
 var centre = new google.maps.LatLng(43.5314284, -5.6684546);
+var oviedo = new google.maps.LatLng(43.351583,-5.849862);
 var mapZoom = 14;
 var map;
 var markers = [];
@@ -18,7 +19,16 @@ var radius = 0;
 var radiusOverlay;
 var routeType = "all";
 var geocoder;
-//var wmsStyle = "polygon,line"
+
+var defaultWaypoints = [
+  {name: "Entrada", lat: 43.353019, lng: -5.850231, img: "http://i.imgur.com/fQcThQX.jpg"},
+  {name: "Espalderas", lat: 43.352296, lng: -5.850522, img: "http://i.imgur.com/0QmfDuE.jpg"},
+  {name: "Skatepark", lat: 43.351875, lng: -5.849913, img: "http://i.imgur.com/AbQAJkB.jpg"},
+  {name: "Rocódromo", lat: 43.351361, lng: -5.850337, img: "http://i.imgur.com/VZsyAGM.jpg"},
+  {name: "Gimnasio", lat: 43.351007, lng: -5.850062, img: "http://i.imgur.com/l4XTljd.jpg"},
+  {name: "Barras", lat: 43.350974, lng: -5.849584, img: "http://i.imgur.com/9XtU0by.jpg"},
+  {name: "Pivotes", lat: 43.350915, lng: -5.848867, img: "http://i.imgur.com/5kvszyT.jpg"}
+]
 
 google.load("visualization", "1", {packages: ["columnchart"]});
 
@@ -30,8 +40,8 @@ function initialize() {
 
   // Opciones del mapa
   var options = {
-    center: centre,
-    zoom: mapZoom,
+    center: oviedo,
+    zoom: 17,
     mapTypeControl: true,
     mapTypeControlOptions: {
         style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
@@ -68,6 +78,9 @@ function initialize() {
   // Al inicio seleccionar todos los checkbox y añadir las capas
   selectAllCheckboxes();
   setCheckLayers();
+//  if (markers == null) {
+    setDefaultWaypoints(); 
+//  }
 }
 
 function selectAllCheckboxes() {
@@ -345,4 +358,29 @@ function setGeocodingAddress() {
       alert("Geocode was not successful for the following reason: " + status);
     }
   }); 
+}
+
+function setCustomMarker(name, location, infowindow) {
+  marker = new google.maps.Marker({
+    position: location,
+    title: name,
+    map: map,
+    icon: "css/star-3.png"
+  });
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });
+  markers.push(marker)
+}
+
+function setDefaultWaypoints() {
+  for (i = 0; i < defaultWaypoints.length; i++) {
+    var waypoint = defaultWaypoints[i];
+    var location = new google.maps.LatLng(waypoint.lat, waypoint.lng)
+    var name = waypoint.name
+    var infowindow = new google.maps.InfoWindow({
+          content: "<h2>" + name + "</h2><img id='info-img' src='" + waypoint.img + "'>"
+        });
+    setCustomMarker(name, location, infowindow);
+  }
 }
