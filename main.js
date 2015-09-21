@@ -19,6 +19,7 @@ var radius = 0;
 var radiusOverlay;
 var routeType = "all";
 var geocoder;
+var infowindows = [];
 
 var defaultWaypoints = [
   {name: "Entrada", lat: 43.353019, lng: -5.850231, img: "http://i.imgur.com/fQcThQX.jpg"},
@@ -360,27 +361,35 @@ function setGeocodingAddress() {
   }); 
 }
 
+function closeAllInfowindows() {
+  for (var i=0; i<infowindows.length; i++) {
+     infowindows[i].close();
+  }
+}
+
 function setCustomMarker(name, location, infowindow) {
-  marker = new google.maps.Marker({
+  var marker = new google.maps.Marker({
     position: location,
     title: name,
     map: map,
     icon: "css/star-3.png"
   });
   marker.addListener('click', function() {
+    closeAllInfowindows();
     infowindow.open(map, marker);
   });
   markers.push(marker)
 }
 
 function setDefaultWaypoints() {
-  for (i = 0; i < defaultWaypoints.length; i++) {
+  for (var i = 0; i < defaultWaypoints.length; i++) {
     var waypoint = defaultWaypoints[i];
     var location = new google.maps.LatLng(waypoint.lat, waypoint.lng)
     var name = waypoint.name
     var infowindow = new google.maps.InfoWindow({
           content: "<h2>" + name + "</h2><img id='info-img' src='" + waypoint.img + "'>"
         });
+    infowindows.push(infowindow);
     setCustomMarker(name, location, infowindow);
   }
 }
